@@ -13,13 +13,16 @@ export default function HomeScreen() {
               source={require('@/assets/images/logo.png')}
               style={styles.reactLogo}
             />
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Search..."
-              placeholderTextColor="#888"
-            />
+            <View style={styles.searchContainer}>
+              <TextInput
+                style={styles.searchBar}
+                placeholder="Search..."
+                placeholderTextColor="#D9D9D9"
+              />
+              <Ionicons name="search-outline" size={24} color="white" style={styles.searchIcon} />
+            </View>
             <TouchableOpacity style={styles.bellIcon}>
-              <Ionicons name="notifications-outline" size={24} color="white" />
+              <Ionicons name="notifications-sharp" size={24} color="white" />
             </TouchableOpacity>
           </View>
         }>
@@ -49,22 +52,35 @@ export default function HomeScreen() {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-            <Ionicons name="card-outline" size={40} color="white" />
+            <Image
+              source={require('@/assets/images/Transaction.png')}
+              style={styles.buttonImage}
+            />
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Spend</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-            <Ionicons name="cash-outline" size={40} color="white" />
+            <Image
+              source={require('@/assets/images/rupee.png')}
+              style={styles.buttonImage}
+            />
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Loan</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-            <Ionicons name="wallet-outline" size={40} color="white" />
+            <Image
+              source={require('@/assets/images/investment.png')}
+              style={styles.buttonImage}
+            />
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Invest</Text>
         </View>
+      </View>
+      <View style={styles.sheadingContainer}>
+        <Text style={styles.sheading}>Your Contacts</Text>
+        <View style={styles.sheadingLine} />
       </View>
     </View>
   );
@@ -86,13 +102,22 @@ const styles = StyleSheet.create({
     width: 40,
     marginRight: 8,
   },
-  searchBar: {
+  searchContainer: {
     flex: 1,
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  searchBar: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#8a8a8a',
     borderRadius: 20,
     paddingHorizontal: 16,
     fontSize: 16,
+    paddingRight: 40, // Space for the icon
+  },
+  searchIcon: {
+    position: 'absolute',
+    right: 10,
   },
   bellIcon: {},
   carousel: {
@@ -152,5 +177,28 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     marginTop: 5,
+    fontWeight: 'bold',
+  },
+  buttonImage: {
+    height: 60,
+    width: 60,
+  },
+  sheadingContainer: {
+    position: 'absolute',
+    top: 590,
+    flexDirection: 'row',
+    marginHorizontal: 16,
+  },
+  sheading: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  sheadingLine: {
+    flex: 1,
+    height: 1,
+    marginTop:2,
+    backgroundColor: '#fff',
+    marginLeft: 8,
   },
 });
