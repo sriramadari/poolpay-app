@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   return (
@@ -52,30 +51,37 @@ export default function HomeScreen() {
         <View style={styles.headingLine} />
       </View>
       <View style={styles.buttonContainer}>
+      
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
+          <Link style={styles.buttonImage} href="/co-spend">
             <Image
               source={require('@/assets/images/Transaction.png')}
               style={styles.buttonImage}
             />
+          </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Spend</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
+          <Link href="/co-loan">
             <Image
               source={require('@/assets/images/rupee.png')}
               style={styles.buttonImage}
             />
+          </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Loan</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
+          <Link href="/co-invest">
             <Image
               source={require('@/assets/images/investment.png')}
               style={styles.buttonImage}
             />
+            </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Invest</Text>
         </View>
@@ -181,8 +187,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonImage: {
-    height: 60,
-    width: 60,
+    height: 40,
+    width: 40,
+    marginTop: 10,
   },
   sheadingContainer: {
     position: 'absolute',
