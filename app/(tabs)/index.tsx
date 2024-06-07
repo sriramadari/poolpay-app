@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function HomeScreen() {
   return (
@@ -111,9 +113,8 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#8a8a8a',
     borderRadius: 20,
-    paddingHorizontal: 16,
-    fontSize: 16,
-    paddingRight: 40, // Space for the icon
+    paddingHorizontal: 12,
+    fontSize: 15, // Space for the icon
   },
   searchIcon: {
     position: 'absolute',
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
   bellIcon: {},
   carousel: {
     position: 'absolute',
-    top: 120,
+    top: 100,
     marginTop: 10,
     marginLeft: 7,
     flexDirection: 'row',
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
   sheadingLine: {
     flex: 1,
     height: 1,
-    marginTop:2,
+    marginTop:10,
     backgroundColor: '#fff',
     marginLeft: 8,
   },
