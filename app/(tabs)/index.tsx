@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text } from 'react-native';
+import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { Link } from 'expo-router';
@@ -54,33 +54,39 @@ export default function HomeScreen() {
       
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link style={styles.buttonImage} href="/co-spend">
+          <Link href="/co-spend" asChild>
+            <Pressable>
             <Image
               source={require('@/assets/images/Transaction.png')}
               style={styles.buttonImage}
             />
+            </Pressable>
           </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Spend</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/co-loan">
+          <Link href="/co-loan" asChild>
+          <Pressable>
             <Image
               source={require('@/assets/images/rupee.png')}
               style={styles.buttonImage}
             />
+            </Pressable>
           </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Loan</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/co-invest">
+          <Link href="/co-invest" asChild> 
+            <Pressable>
             <Image
               source={require('@/assets/images/investment.png')}
-              style={styles.buttonImage}
+              style={styles.buttonImage} 
             />
+            </Pressable>
             </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Invest</Text>
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
   button: {
     height: 100,
     width: 100,
-    backgroundColor: '#400099',
+    backgroundColor: '#6A00FF',
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -187,9 +193,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonImage: {
-    height: 40,
-    width: 40,
-    marginTop: 10,
+    height: 60,
+    width: 60,
   },
   sheadingContainer: {
     position: 'absolute',
