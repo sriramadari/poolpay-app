@@ -24,7 +24,7 @@ const Cospend = () => {
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/transaction_completed" asChild>
+          <Link href="/payment" asChild>
               <Pressable>
                 <Image
                   source={require('@/assets/images/Phone.png')}

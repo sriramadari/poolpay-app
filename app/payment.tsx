@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Image, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import  { useState } from 'react';
 import { CheckBox } from 'react-native-elements';
+import { Link } from 'expo-router';
 
 export default function PaymentScreen() {
   const [inputLength, setInputLength] = useState(0);
@@ -50,7 +51,11 @@ export default function PaymentScreen() {
             <Text style={styles.buttonText}>Pay</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.addFriendsButton}>
-            <Text style={styles.addFriendsButtonText}>Add Friends</Text>
+            <Link href="./add friends" asChild>
+              <Pressable>
+                <Text style={styles.addFriendsButtonText}>Add Friends</Text>
+                </Pressable>
+            </Link>
           </TouchableOpacity>
         </View>
        
