@@ -24,10 +24,14 @@ const Cospend = () => {
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-              <Image
-                source={require('@/assets/images/Phone.png')}
-                style={styles.buttonImage}
-              />
+          <Link href="/transaction_completed" asChild>
+              <Pressable>
+                <Image
+                  source={require('@/assets/images/Phone.png')}
+                  style={styles.buttonImage}
+                />
+              </Pressable>
+            </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Pay Through Number</Text>
         </View>

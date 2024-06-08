@@ -1,36 +1,59 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import  { useState } from 'react';
+import { CheckBox } from 'react-native-elements';
 
 export default function PaymentScreen() {
+  const [inputLength, setInputLength] = useState(0);
+  const [isBillGenerated, setIsBillGenerated] = useState(false);
   return (
     <LinearGradient colors={['#0D0B0F', '#150032']} style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
-      <Text style={styles.payingTo}>Paying to</Text>
-      <Image style={styles.profileImage} source={require('@/assets/images/demo.jpeg')} />
-      <Text style={styles.profileName}>Receiver's Name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter amount"
-        placeholderTextColor="#525252"
-      />
-      <View style={styles.checkboxContainer}>
-        <Text style={styles.checkboxText}>Generate a bill</Text>
+      <View style={styles.topContainer}>
+        <View style={styles.backButtonContainer}>
+          <TouchableOpacity style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="#000" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.contentContainer}>
+          <Text style={styles.payingTo}>Paying to</Text>
+          <Image style={styles.profileImage} source={require('@/assets/images/demo.jpeg')} />
+          <Text style={styles.profileName}>Randyorton</Text>
+          <View style={styles.inputContainer}>
+  <Text style={styles.currencySymbol}>₹</Text>
+  <TextInput
+    style={styles.input}
+    placeholderTextColor="#525252"
+    onChangeText={(text) => setInputLength(text.length)}
+    textAlign='center' // This will center the text inside the input
+  />
+</View>
+
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.payButton}>
-          <Text style={styles.buttonText}>Pay</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.addFriendsButton}>
-          <Text style={styles.addFriendsButtonText}>Add Friends</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonTextContainer}>
-        <Text style={styles.payAloneText}>Pay alone</Text>
-        <Text style={styles.bringFriendsText}>Bring your friends too</Text>
+      
+      <View style={styles.bottomContainer}>
+      {/* <CheckBox
+  title='Generate a bill'
+  checked={isBillGenerated}
+  onPress={() => setIsBillGenerated(!isBillGenerated)}
+  textStyle={styles.checkboxText}
+  containerStyle={styles.checkboxContainer}
+  checkedColor='white'
+  uncheckedColor='white'
+  checkedIcon={<Ionicons name="checkbox" size={24} color="white" />}
+  uncheckedIcon={<Ionicons name="square-outline" size={24} color="white" />}
+/> */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.payButton}>
+            <Text style={styles.buttonText}>Pay</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.addFriendsButton}>
+            <Text style={styles.addFriendsButtonText}>Add Friends</Text>
+          </TouchableOpacity>
+        </View>
+       
       </View>
     </LinearGradient>
   );
@@ -39,56 +62,78 @@ export default function PaymentScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 20,
+  },
+  topContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  backButtonContainer: {
+    position: 'absolute',
+    top: 50,
+    left: 0,
   },
   backButton: {
     backgroundColor: '#6A00FF',
     borderRadius: 50,
-    padding: 10,
-    alignSelf: 'flex-start',
+    padding: 5,
   },
-  backButtonText: {
-    color: '#000',
-    fontWeight: 'bold',
+  contentContainer: {
+    alignItems: 'center',
   },
   payingTo: {
     color: '#fff',
     fontSize: 15,
-    fontWeight: '600',
-    alignSelf: 'center',
+    fontWeight: '300',
+    paddingBottom: 10,
   },
   profileImage: {
     width: 54,
     height: 54,
     borderRadius: 27,
-    alignSelf: 'center',
+    
   },
   profileName: {
     color: '#fff',
     fontSize: 15,
     fontWeight: '600',
-    alignSelf: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  
+  currencySymbol: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: '500',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
+    borderBottomColor: '#6A00FF',
+    borderBottomWidth: 1,
+    width: '35%', // Constant width
+    marginBottom: 10,
   },
   input: {
     height: 57,
-    borderColor: '#6A00FF',
-    borderWidth: 1,
-    marginBottom: 10,
     color: '#fff',
     fontSize: 32,
     fontWeight: '700',
-    alignSelf: 'center',
-    width: '90%',
+    width: '60%', // Adjust this as needed
   },
   checkboxContainer: {
-    alignSelf: 'center',
     marginBottom: 10,
+    backgroundColor: 'transparent',
   },
   checkboxText: {
     color: '#fff',
     fontSize: 12,
     fontWeight: '500',
+  },
+  bottomContainer: {
+    justifyContent: 'flex-end',
+    marginBottom: 36,
   },
   buttonContainer: {
     flexDirection: 'row',
