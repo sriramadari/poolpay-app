@@ -11,7 +11,7 @@ const Cospend = () => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/qrcode" asChild>
+          <Link href="/qr_code" asChild>
             <Pressable>
               <Image
                 source={require('@/assets/images/qr code (1).png')}
