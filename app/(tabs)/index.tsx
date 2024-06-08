@@ -1,10 +1,36 @@
-import React from 'react';
-import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text, Pressable } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text, Pressable, Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { Link } from 'expo-router';
 
 export default function HomeScreen() {
+  const scrollViewRef = useRef<ScrollView>(null);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const carouselImages = [
+    require('@/assets/images/image1.png'),
+    require('@/assets/images/image2.png'),
+    require('@/assets/images/image3.png'),
+    require('@/assets/images/image4.png')
+  ];
+
+  const windowWidth = Dimensions.get('window').width;
+
+  useEffect(() => {
+    let position = 0;
+    const scrollInterval = setInterval(() => {
+      if (scrollViewRef.current) {
+        // Move to the next image position
+        position = (position + 1) % carouselImages.length;
+        // Center each image in the ScrollView
+        const offsetX = position * windowWidth;
+        scrollViewRef.current.scrollTo({ x: offsetX, animated: true });
+      }
+    }, 3000);
+
+    return () => clearInterval(scrollInterval);
+  }, [carouselImages.length, windowWidth]);
+
   return (
     <View style={styles.container}>
       <ParallaxScrollView
@@ -28,65 +54,67 @@ export default function HomeScreen() {
           </View>
         }>
       </ParallaxScrollView>
-      <ScrollView horizontal={true} style={styles.carousel}>
-        <Image
-          source={require('@/assets/images/image1.png')}
-          style={styles.carouselImage}
-        />
-        <Image
-          source={require('@/assets/images/image2.png')}
-          style={styles.carouselImage}
-        />
-        <Image
-          source={require('@/assets/images/image3.png')}
-          style={styles.carouselImage}
-        />
-        <Image
-          source={require('@/assets/images/image4.png')}
-          style={styles.carouselImage}
-        />
+      <ScrollView
+        ref={scrollViewRef}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={styles.carousel}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
+        scrollEventThrottle={16}
+      >
+        {carouselImages.map((image, index) => (
+          <View key={index} style={{ width: windowWidth, justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+              source={image}
+              style={[styles.carouselImage, { width: windowWidth - 20 }]} // Reduced width for margin
+            />
+          </View>
+        ))}
       </ScrollView>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>Start your Transaction</Text>
         <View style={styles.headingLine} />
       </View>
       <View style={styles.buttonContainer}>
-      
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/co-spend" asChild>
-            <Pressable>
-            <Image
-              source={require('@/assets/images/Transaction.png')}
-              style={styles.buttonImage}
-            />
-            </Pressable>
-          </Link>
+            <Link href="/co-spend" asChild>
+              <Pressable>
+                <Image
+                  source={require('@/assets/images/Transaction.png')}
+                  style={styles.buttonImage}
+                />
+              </Pressable>
+            </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Spend</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/co-loan" asChild>
-          <Pressable>
-            <Image
-              source={require('@/assets/images/rupee.png')}
-              style={styles.buttonImage}
-            />
-            </Pressable>
-          </Link>
+            <Link href="/co-loan" asChild>
+              <Pressable>
+                <Image
+                  source={require('@/assets/images/rupee.png')}
+                  style={styles.buttonImage}
+                />
+              </Pressable>
+            </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Loan</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/co-invest" asChild> 
-            <Pressable>
-            <Image
-              source={require('@/assets/images/investment.png')}
-              style={styles.buttonImage} 
-            />
-            </Pressable>
+            <Link href="/co-invest" asChild>
+              <Pressable>
+                <Image
+                  source={require('@/assets/images/investment.png')}
+                  style={styles.buttonImage} 
+                />
+              </Pressable>
             </Link>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Co Invest</Text>
@@ -126,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#8a8a8a',
     borderRadius: 20,
     paddingHorizontal: 12,
-    fontSize: 15, // Space for the icon
+    fontSize: 15,
   },
   searchIcon: {
     position: 'absolute',
@@ -137,14 +165,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 100,
     marginTop: 10,
-    marginLeft: 7,
+    marginLeft: 10,
     flexDirection: 'row',
   },
   carouselImage: {
-    width: 360,
     height: 250,
-    marginHorizontal: 10,
+    marginLeft: 10,
+    marginRight: 10,
     borderRadius: 10,
+    resizeMode: 'cover', 
   },
   headingContainer: {
     position: 'absolute',
@@ -210,9 +239,8 @@ const styles = StyleSheet.create({
   sheadingLine: {
     flex: 1,
     height: 1,
-    marginTop:10,
+    marginTop: 10,
     backgroundColor: '#fff',
     marginLeft: 8,
   },
 });
-
