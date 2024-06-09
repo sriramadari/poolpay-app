@@ -4,19 +4,20 @@
     "slug": "poolpay-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/loadinggg.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/logo.png",
-      "backgroundColor": "#000000"
+      "image": "./assets/images/loadinggg.png",
+      "backgroundColor": "#000000",
+      "marginRight":"10"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/loadinggg.png",
         "backgroundColor": "#ffffff"
       }
     },

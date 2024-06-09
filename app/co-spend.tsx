@@ -11,19 +11,22 @@ const Cospend = () => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-          <Link href="/qr_code" asChild>
-            <Pressable>
-              <Image
-                source={require('@/assets/images/qr code (1).png')}
-                style={styles.buttonImage}
-              />
-            </Pressable>
-          </Link>
+          <Text>
+  <Link href="/qr_code" asChild>
+    <Pressable>
+      <Image
+        source={require('@/assets/images/qr code (1).png')}
+        style={styles.buttonImage}
+      />
+    </Pressable>
+  </Link>
+</Text>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Scan QR</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
+          <Text>
           <Link href="/payment" asChild>
               <Pressable>
                 <Image
@@ -32,6 +35,7 @@ const Cospend = () => {
                 />
               </Pressable>
             </Link>
+            </Text>
           </TouchableOpacity>
           <Text style={styles.buttonText}>Pay Through Number</Text>
         </View>
