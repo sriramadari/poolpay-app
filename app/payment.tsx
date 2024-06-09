@@ -22,22 +22,19 @@ export default function PaymentScreen({route}:Props) {
   const [inputLength, setInputLength] = useState(0);
   const [isBillGenerated, setIsBillGenerated] = useState(false);
   const params = useLocalSearchParams()
-  console.log(params)
-  const scannedNumber = params.profileName;
-  // console.log(route.params);
+ 
+  const { profileName = "Randyorton" } = useLocalSearchParams();
+const scannedNumber = profileName;
+  
   return (
     <LinearGradient colors={['#0D0B0F', '#150032']} style={styles.container}>
       <View style={styles.topContainer}>
-        {/* <View style={styles.backButtonContainer}>
-          <TouchableOpacity style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#000" />
-          </TouchableOpacity>
-        </View> */}
+    
         <View style={styles.contentContainer}>
           <Text style={styles.payingTo}>Paying to</Text>
           <Image style={styles.profileImage} source={require('@/assets/images/demo.jpeg')} />
           <Text style={styles.profileName}>{scannedNumber}</Text>
-          console.log(scannedNumber)
+         
           <View style={styles.inputContainer}>
   <Text style={styles.currencySymbol}>₹</Text>
   <TextInput
