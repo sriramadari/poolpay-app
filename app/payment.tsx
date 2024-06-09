@@ -37,6 +37,7 @@ export default function PaymentScreen({route}:Props) {
           <Text style={styles.payingTo}>Paying to</Text>
           <Image style={styles.profileImage} source={require('@/assets/images/demo.jpeg')} />
           <Text style={styles.profileName}>{scannedNumber}</Text>
+          console.log(scannedNumber)
           <View style={styles.inputContainer}>
   <Text style={styles.currencySymbol}>₹</Text>
   <TextInput
