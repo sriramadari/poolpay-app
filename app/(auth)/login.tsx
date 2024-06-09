@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {useRouter} from 'expo-router';
 
 export default function App() {
+  const router = useRouter();
   return (
     <LinearGradient colors={['#0D0B0F', '#150032']} style={styles.container}>
      <View style={styles.inputContainer}>
@@ -31,7 +33,14 @@ export default function App() {
       </TouchableOpacity>
       <View style={styles.newUser}>
         <Text style={styles.newUserText}>New User? </Text>
-        <Text style={styles.createAccount}>Create new account</Text>
+        <TouchableOpacity onPress={
+           ()=>{
+            console.log('signup')
+            router.push('/signup')
+          }
+          } > 
+          <Text style={styles.createAccount}>Create an account</Text> 
+          </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -45,7 +54,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontFamily: 'Inter',
+    fontFamily: 'SpaceMono',
     fontSize: 16,
     marginBottom: 8,
     fontWeight: 'bold',    

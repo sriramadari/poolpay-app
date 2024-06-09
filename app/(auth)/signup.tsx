@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import {useRouter} from 'expo-router';
 export default function App() {
+  const router = useRouter();
   return (
     <LinearGradient colors={['#0D0B0F', '#150032']} style={styles.container}>
      <View style={styles.inputContainer}>
@@ -31,12 +32,20 @@ export default function App() {
     secureTextEntry
   />
 </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+      style={styles.button}>
         <Text style={styles.buttonText}>Sign in</Text>
       </TouchableOpacity>
       <View style={styles.newUser}>
         <Text style={styles.newUserText}>Already Have an account? </Text>
-        <Text style={styles.createAccount}>Log in</Text>
+         <TouchableOpacity onPress={
+            ()=>{
+              console.log('login')
+              router.push('/login')
+            }
+          } > 
+          <Text style={styles.createAccount}>Log in</Text> 
+          </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontFamily: 'Inter',
+    fontFamily: 'SpaceMono',
     fontSize: 16,
     marginBottom: 8,
     fontWeight: 'bold',    

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '30%',
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     paddingHorizontal: 20,
   },
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonImage: {
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
   },
 });
 
