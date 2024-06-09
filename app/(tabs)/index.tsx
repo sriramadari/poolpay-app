@@ -1,12 +1,22 @@
-import React, { useRef, useEffect } from 'react';
-import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text, Pressable, Animated, Dimensions } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Text,FlatList, Pressable, Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { Link } from 'expo-router';
+import * as Contacts from "expo-contacts";
 
+type PhoneNumber = {
+  number: string;
+};
+
+type ContactItem = {
+  name: string;
+  phoneNumbers?: PhoneNumber[];
+};
 export default function HomeScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
+  const [contacts, setContacts] = useState<any[]>([]);
   const carouselImages = [
     require('@/assets/images/image1.png'),
     require('@/assets/images/image2.png'),
@@ -16,6 +26,20 @@ export default function HomeScreen() {
 
   const windowWidth = Dimensions.get('window').width;
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
+        });
+        if (data.length > 0) {
+          setContacts(data);
+          console.log(data[0]);
+        }
+      }
+    })();
+  }, []);
   useEffect(() => {
     let position = 0;
     const scrollInterval = setInterval(() => {
@@ -30,6 +54,22 @@ export default function HomeScreen() {
 
     return () => clearInterval(scrollInterval);
   }, [carouselImages.length, windowWidth]);
+
+  const keyExtractor = (item:any) => item?.id?.toString();
+
+  // Updated renderContact function
+const renderContact = ({ item }: { item: ContactItem }) => (
+  <View style={styles.contactItem}>
+    <Ionicons name="person-circle-outline" size={24} color="white" style={styles.contactIcon} />
+    <View style={styles.contactTextContainer}>
+      <Text style={styles.contactName}>{item.name}</Text>
+      {item.phoneNumbers && item.phoneNumbers.map((phone: PhoneNumber, index: number) => (
+        <Text key={index} style={styles.contactPhoneNumber}>{phone.number}</Text>
+      ))}
+    </View>
+  </View>
+);
+
 
   return (
     <View style={styles.container}>
@@ -124,6 +164,14 @@ export default function HomeScreen() {
         <Text style={styles.sheading}>Your Contacts</Text>
         <View style={styles.sheadingLine} />
       </View>
+      <FlatList
+        data={contacts}
+        renderItem={renderContact}
+        keyExtractor={keyExtractor}
+        contentContainerStyle={styles.contactsContainer}
+        ListEmptyComponent={<Text style={styles.noContactsText}>No contacts available</Text>}
+      />
+
     </View>
   );
 }
@@ -242,5 +290,47 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#fff',
     marginLeft: 8,
+  },
+  contactsContainer: {
+    position: 'absolute',
+    top: 630, // Adjust as needed to fit below other elements
+    flex: 1,
+    width: '100%',
+    padding: 16,
+  },
+  contactItem: {
+    backgroundColor: '#1a1a1a',
+    padding: 12,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  contactIcon: {
+    marginRight: 12,
+  },
+  contactTextContainer: {
+    flex: 1,
+  },
+  contactName: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  contactPhoneNumber: {
+    color: '#ccc',
+    fontSize: 14,
+  },
+  noContactsText: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
   },
 });

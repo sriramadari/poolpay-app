@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/loadinggg.png",
       "backgroundColor": "#000000",
-      "marginRight":"10"
+      "marginRight": "10"
     },
     "ios": {
       "supportsTablet": true
@@ -19,7 +19,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/loadinggg.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "WRITE_CONTACTS"
+      ]
     },
     "web": {
       "bundler": "metro",
