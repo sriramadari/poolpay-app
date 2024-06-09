@@ -12,16 +12,6 @@ const CoLoan = () => {
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
               <Image
-                source={require('@/assets/images/globe.png')}
-                style={styles.buttonImage}
-              />
-            
-          </TouchableOpacity>
-          <Text style={styles.buttonText}>Request Globally</Text>
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button}>
-              <Image
                 source={require('@/assets/images/friends.png')}
                 style={styles.buttonImage}
               />
@@ -52,7 +42,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '30%',
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     paddingHorizontal: 20,
   },
