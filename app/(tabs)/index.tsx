@@ -293,10 +293,11 @@ const styles = StyleSheet.create({
   },
   contactsContainer: {
     position: 'absolute',
-    top: 630, // Adjust as needed to fit below other elements
+    top: 600, // Adjust as needed to fit below other elements
     flex: 1,
     width: '100%',
     padding: 16,
+    marginTop:15,
   },
   contactItem: {
     backgroundColor: '#1a1a1a',
