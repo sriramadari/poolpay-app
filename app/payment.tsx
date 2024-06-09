@@ -65,7 +65,7 @@ const scannedNumber = profileName;
             <Text style={styles.buttonText}>Pay</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.addFriendsButton}>
-            <Link href="./add friends" asChild>
+            <Link href="./add_friends" asChild>
               <Pressable>
                 <Text style={styles.addFriendsButtonText}>Add Friends</Text>
                 </Pressable>
