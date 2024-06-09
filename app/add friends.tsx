@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import the navigation hook
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as Contacts from "expo-contacts";
 
 const AddFriends = () => {
-  const navigation = useNavigation(); // Get the navigation object
+  const navigation = useNavigation();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedContacts, setSelectedContacts] = useState<any[]>([]);
@@ -42,14 +42,6 @@ const AddFriends = () => {
     return !!selectedContacts.find(c => c.id === contact.id);
   };
 
-  // const handleNext = () => {
-  //   if (selectedContacts.length === 0) {
-  //     Alert.alert("Error", "Please select at least one contact.");
-  //     return;
-  //   }
-  //   navigation.navigate('NextPage', { selectedContacts });
-  // };
-
   return (
     <View style={styles.container}>
       <TextInput
@@ -78,12 +70,15 @@ const AddFriends = () => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.contact}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={styles.contactDetails}>
               <Image source={{ uri: item.imageAvailable ? item.image.uri : 'https://via.placeholder.com/60' }} style={styles.photo} />
               <Text style={styles.contactName}>{item.name}</Text>
             </View>
             <TouchableOpacity
-              style={styles.addButton}
+              style={[
+                styles.addButton,
+                isContactSelected(item) && styles.removeButton,
+              ]}
               onPress={() => {
                 isContactSelected(item) ? removeContact(item) : addContact(item);
               }}
@@ -94,7 +89,7 @@ const AddFriends = () => {
             </TouchableOpacity>
           </View>
         )}
-        contentContainerStyle={styles.contactsList}
+        contentContainerStyle={[styles.contactsList, { paddingBottom: 20 }]}
       />
 
       <TouchableOpacity style={styles.nextButton}>
@@ -122,21 +117,29 @@ const styles = StyleSheet.create({
   },
   selectedContactsContainer: {
     flexDirection: 'row',
-    padding: 10,
+    padding:15,
+    backgroundColor:'#272727',
+    paddingLeft:0,
+    justifyContent:'space-between',
   },
   selectedContact: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 10,
+    alignItems:'center',
+    paddingBottom:10,
   },
   contact: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  contactDetails: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   photo: {
-    width: 60,
-    height: 60,
+    width: 55,
+    height: 55,
     borderRadius: 30,
     marginRight: 10,
   },
@@ -144,19 +147,22 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   addButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#6A00FF',
     paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     borderRadius: 5,
+  },
+  removeButton: {
+    backgroundColor: 'red',
   },
   addButtonText: {
     color: '#fff',
   },
   contactsList: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
   nextButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#6A00FF',
     paddingVertical: 10,
     borderRadius: 5,
     alignItems: 'center',
